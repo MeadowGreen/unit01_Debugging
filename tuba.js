@@ -64,7 +64,24 @@ function verifyMonths() {
 
 /* verify that a fuel option button is selected */
 function verifyFuel() {
-   testFormCompleteness();
+   try{
+      for(var i = 0; i < 3; i++){
+         if(fuelFieldset.getElementsByTagName("input")[i].checked){
+            fuelComplete = true;
+            messageElement.innerHTML = "";
+            testFormCompleteness();
+            i = 4
+         }
+      }
+      if (i === 3){
+         throw "Please select at least one fuel type.";
+      }
+   }
+   catch(message){
+      fuelComplete = false;
+      messageHeadElement.innerHTML = "";
+      messageHeadElement.innerHTML = message;
+   }
 }
 
 /* check if all four form sections are completed */
